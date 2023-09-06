@@ -1,14 +1,28 @@
 package uk.nhs.england;
 
 import org.junit.jupiter.api.Test;
+import uk.nhs.england.tags.Target;
+import uk.nhs.england.tags.Production;
+import uk.nhs.england.tags.Uat;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+
 public class HelloWorldTest {
 
+    @Test @Uat
+    public void productionShouldAnswerWithTrue() {
+        assertTrue(true);
+    }
+
+    @Test @Production
+    public void uatShouldAnswerWithTrue() {
+        assertTrue(true);
+    }
+
     @Test
-    public void shouldAnswerWithTrue() {
-        assertTrue(false);
+    public void alwaysShouldAnswerWithTrue() {
+        assertTrue(true);
     }
 
 }
