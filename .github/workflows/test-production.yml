@@ -21,8 +21,7 @@ jobs:
 
       - name: Get Dependencies # To keep the logs for the next step clean.
         run: |
-          mvn dependency:resolve
-          mvn dependency:resolve-plugins
+          mvn verify -DskipTests -B -V -T 2C
 
       - name: Run tests
         run: |
