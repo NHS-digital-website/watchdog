@@ -22,7 +22,7 @@ jobs:
         uses: ./.github/actions/slack-message
         with:
           SLACK_API_TOKEN: ${{ secrets.SLACK_API_TOKEN }}
-          SLACK_CHANNEL: ${{ variables.SLACK_CHANNEL_PRODUCTION }}
+          SLACK_CHANNEL: ${{ vars.SLACK_CHANNEL_PRODUCTION }}
           TITLE: ":doggy: Watchdog Alert"
           MESSAGE: |
             :x: @channel One or more Watchdog tests have failed. Please check the GitHub Actions Workflow logs for more information.
@@ -32,7 +32,7 @@ jobs:
         uses: ./.github/actions/slack-message
         with:
           SLACK_API_TOKEN: ${{ secrets.SLACK_API_TOKEN }}
-          SLACK_CHANNEL: ${{ variables.SLACK_CHANNEL_PRODUCTION }}
+          SLACK_CHANNEL: ${{ vars.SLACK_CHANNEL_PRODUCTION }}
           TITLE: ":doggy: Watchdog Message"
           MESSAGE: |
             :green_tick: All Watchdog tests have passed successfully.
