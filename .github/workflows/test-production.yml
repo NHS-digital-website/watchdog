@@ -13,9 +13,20 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v3
 
+      - name: Set up JDK 8
+        uses: actions/setup-java@v3
+        with:
+          distribution: 'adopt'
+          java-version: 8
+
+      - name: Get Dependencies # To keep the logs for the next step clean.
+        run: |
+          mvn dependency:resolve
+          mvn dependency:resolve-plugins
+
       - name: Run tests
         run: |
-          mvn test -Dgroups='production,none()'
+          mvn test "-Dgroups=production,none()"
           
       - name: Slack message (Test Failed)
         if: ${{ failure() }}
