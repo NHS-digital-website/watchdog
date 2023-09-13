@@ -20,10 +20,10 @@ This will resolve the project's depenances.
 To run Watchdog you simply need to run the following command:
 ```bash
 # For Production
-mvn test -Dgroups='production,none()'
+mvn test "-Dgroups=production,none()"
 
 # For UAT
-mvn test -Dgroups='uat,none()'
+mvn test "-Dgroups=uat,none()"
 ```
 Note `none()` is a special tag that will run non tagged tests (i.e. @Test without @Production or @Uat).
 
