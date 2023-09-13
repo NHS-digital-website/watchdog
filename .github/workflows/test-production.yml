@@ -19,9 +19,17 @@ jobs:
           distribution: 'adopt'
           java-version: 8
 
-      - name: Get Dependencies # To keep the logs for the next step clean.
+      - name: Cache Maven dependencies
+        uses: actions/cache@v3
+        with:
+          path: ~/.m2/repository
+          key: ${{ runner.os }}-maven-${{ hashFiles('**/pom.xml') }}
+          restore-keys: |
+            ${{ runner.os }}-maven-
+
+      - name: Get Dependencies # To try to keep the logs for the next step clean.
         run: |
-          mvn verify -DskipTests -B -V -T 2C
+          mvn install -DskipTests -B -V -T 2C
 
       - name: Run tests
         run: |

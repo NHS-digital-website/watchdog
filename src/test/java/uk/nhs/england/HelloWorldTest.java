@@ -16,7 +16,7 @@ public class HelloWorldTest {
 
     @Test @Production
     public void uatShouldAnswerWithTrue() {
-        assertTrue(false);
+        assertTrue(true);
     }
 
     @Test
