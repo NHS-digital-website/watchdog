@@ -1,13 +1,13 @@
-name: Test Production Workflow
+name: Test UAT Workflow
 
 on:
-  push:
-    branches:
-      - main # this is temp while setting up, will switch to cron
+  repository_dispatch:
+    types:
+      - webhook-for-uat
 
 jobs:
-  test-production:
-    name: Test Production
+  test-uat:
+    name: Test UAT
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
