@@ -1,9 +1,9 @@
 name: Test Production Workflow
 
 on:
-  # Run on a cron job at 1am UTC (9pm EST)
-  schedule:
-      - cron: '0 1 * * *'
+  push:
+    branches:
+      - main # this is temp while setting up, will switch to cron
 
 jobs:
   test-production:
@@ -33,14 +33,14 @@ jobs:
 
       - name: Run tests
         run: |
-          mvn test "-Dgroups=production,none()"
+          mvn test "-Dgroups=uat,none()"
           
       - name: Slack message (Test Failed)
         if: ${{ failure() }}
         uses: ./.github/actions/slack-message
         with:
           SLACK_API_TOKEN: ${{ secrets.SLACK_API_TOKEN }}
-          SLACK_CHANNEL: ${{ vars.SLACK_CHANNEL_PRODUCTION }}
+          SLACK_CHANNEL: ${{ vars.SLACK_CHANNEL_UAT }}
           TITLE: ":doggy: Watchdog Alert"
           MESSAGE: |
             :x: @channel One or more Watchdog tests have failed. Please check the GitHub Actions Workflow logs for more information.
@@ -50,7 +50,7 @@ jobs:
         uses: ./.github/actions/slack-message
         with:
           SLACK_API_TOKEN: ${{ secrets.SLACK_API_TOKEN }}
-          SLACK_CHANNEL: ${{ vars.SLACK_CHANNEL_PRODUCTION }}
+          SLACK_CHANNEL: ${{ vars.SLACK_CHANNEL_UAT }}
           TITLE: ":doggy: Watchdog Message"
           MESSAGE: |
             :green_tick: All Watchdog tests have passed successfully.
