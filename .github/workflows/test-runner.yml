@@ -1,13 +1,18 @@
-name: Test Production Workflow
+name: Test Runner Workflow
 
 on:
-  # Run on a cron job at 1am UTC (9pm EST)
-  schedule:
-      - cron: '0 1 * * *'
+  workflow_call:
+    inputs:
+      TARGET_NAME:
+        required: true
+        type: string
+      TARGET_SLACK_CHANNEL:
+        required: true
+        type: string
 
 jobs:
-  test-production:
-    name: Test Production
+  test-runner:
+    name: Test Runner
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -33,14 +38,14 @@ jobs:
 
       - name: Run tests
         run: |
-          mvn test "-Dgroups=production,none()"
+          mvn test "-Dgroups=${{ inputs.TARGET_NAME }},none()"
           
       - name: Slack message (Test Failed)
         if: ${{ failure() }}
         uses: ./.github/actions/slack-message
         with:
           SLACK_API_TOKEN: ${{ secrets.SLACK_API_TOKEN }}
-          SLACK_CHANNEL: ${{ vars.SLACK_CHANNEL_PRODUCTION }}
+          SLACK_CHANNEL: ${{  inputs.TARGET_SLACK_CHANNEL }}
           TITLE: ":doggy: Watchdog Alert"
           MESSAGE: |
             :x: @channel One or more Watchdog tests have failed. Please check the GitHub Actions Workflow logs for more information.
@@ -50,7 +55,7 @@ jobs:
         uses: ./.github/actions/slack-message
         with:
           SLACK_API_TOKEN: ${{ secrets.SLACK_API_TOKEN }}
-          SLACK_CHANNEL: ${{ vars.SLACK_CHANNEL_PRODUCTION }}
+          SLACK_CHANNEL: ${{  inputs.TARGET_SLACK_CHANNEL }}
           TITLE: ":doggy: Watchdog Message"
           MESSAGE: |
             :green_tick: All Watchdog tests have passed successfully.

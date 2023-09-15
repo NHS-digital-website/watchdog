@@ -1,0 +1,18 @@
+name: Test Production Workflow
+
+on:
+  # Run on a cron job at 1am UTC (9pm EST) Sunday through Thursday
+  schedule:
+      - cron: '0 1 * * 0-4'
+  push:
+    branches:
+      - main
+
+jobs:
+  test_runner_workflow_job:
+    name: Run Production Tests
+    uses: ./.github/workflows/test-runner.yml
+    with:
+      TARGET_NAME: production
+      TARGET_SLACK_CHANNEL: ${{ vars.SLACK_CHANNEL_PRODUCTION }}
+    secrets: inherit

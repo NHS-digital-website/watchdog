@@ -1,0 +1,15 @@
+name: Test UAT Workflow
+
+on:
+  repository_dispatch:
+    types:
+      - webhook-for-uat
+
+jobs:
+  test_runner_workflow_job:
+    name: Run UAT Tests
+    uses: ./.github/workflows/test-runner.yml
+    with:
+      TARGET_NAME: uat
+      TARGET_SLACK_CHANNEL: ${{ vars.SLACK_CHANNEL_UAT }}
+    secrets: inherit
