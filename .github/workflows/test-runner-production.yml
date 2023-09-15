@@ -4,9 +4,6 @@ on:
   # Run on a cron job at 1am UTC (9pm EST) Sunday through Thursday
   schedule:
       - cron: '0 1 * * 0-4'
-  push:
-    branches:
-      - main
 
 jobs:
   test_runner_workflow_job:
