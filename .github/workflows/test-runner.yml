@@ -1,3 +1,5 @@
+# This is an abstract workflow for running Watchdog informally by the concrete workflows for UAT and Production.
+# For details on calling workflows, there inputs etc. see: https://docs.github.com/en/actions/using-workflows/reusing-workflows
 name: Test Runner Workflow
 
 on:

@@ -1,6 +1,7 @@
 name: Test UAT Workflow
 
 on:
+  # For details on creating a repository_dispatch event see: https://docs.github.com/en/rest/repos/repos#create-a-repository-dispatch-event
   repository_dispatch:
     types:
       - webhook-for-uat

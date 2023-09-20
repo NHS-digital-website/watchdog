@@ -16,7 +16,7 @@ mvn dependency:resolve
 ```
 This will resolve the project's depenances.
 
-# Running Watchdog
+# Running Watchdog in development
 To run Watchdog you simply need to run the following command:
 ```bash
 # For Production
@@ -85,3 +85,34 @@ This project essentially runs a series of J Unit tests. The output should look s
 And will gernate the flowing reports:
 - Placeholder
 - Placeholder
+
+# Running Watchdog in Production
+The GitHub Actions Workflow service runs Watchdog.
+
+Watchdog is made up of two worflows, one for [UAT](.github/workflows/test-runner-uat.yml) and one for [Production](.github/workflows/test-runner-production.yml).
+
+For details on using GitHub Actions' `secrets` see [encrypted secrets](https://docs.github.com/en/actions/reference/encrypted-secrets).
+For details on using GitHub Actions' `vars` see [variables](https://docs.github.com/en/actions/learn-github-actions/variables).
+
+## UAT details
+UAT is triggered by our log scanner. When our log scanner detects a new UAT deployment it dispatches a GitHub webhook.
+
+See:
+- alerts  > UAT Started
+- actions > UAT Run Watchdog
+
+The workflow requires the following vars to be set:
+- `SLACK_CHANNEL_UAT` this is the ID of our dedicated UAT Slack channel.
+
+And the following secrets to be set:
+- `SLACK_API_TOKEN` this is the Slack API token of our Slack Bot.
+
+
+## Production details
+Production is triggered by a Workflow CRON job.
+
+The workflow requires the following vars to be set:
+- `SLACK_CHANNEL_PRODUCTION` this is the ID of our dedicated Production Slack channel.
+
+And the following secrets to be set:
+- `SLACK_API_TOKEN` this is the Slack API token of our Slack Bot.
