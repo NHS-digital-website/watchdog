@@ -14,18 +14,58 @@ Once you have the above installed, execute this Maven command in the directory w
 ```bash
 mvn dependency:resolve
 ```
-This will resolve the project's depenances.
+This will resolve the project's dependences.
 
-# Running Watchdog in development
+# Running Watchdog a local development machine
+To run Watchdog on a local machine, the properties for the respective subject must be set.
+
+## Run Watchdog against production
+The respective properties for running Watchdog against production are `groups=production,none()`, and domain: `domain=digital.nhs.uk`.
+
+This will result in Watchdog running tests against the production environment.
+
+Note `none()` is a special tag that will run non tagged tests (i.e. @Test without @Production or @Uat).
+
+### Terminal Example
+```bash
+mvn test "-Dgroups=production,none()" "-Ddomain=digital.nhs.uk"
+```
+
+### IntelliJ Example
+![production-config.png](images/production-config.png)
+
+## Run Watchdog against UAT
+The respective properties for running Watchdog against UAT are `groups=uat,none()`, and domain: `domain=uat2.nhsd.io`.
+
+This will result in Watchdog running tests against the UAT environment.
+
+Note `none()` is a special tag that will run non tagged tests (i.e. @Test without @Production or @Uat).
+
+### Terminal Example
+```bash
+mvn test "-Dgroups=uat,none()" "-Ddomain=uat2.nhsd.io"
+```
+
+### IntelliJ Example
+![production-config.png](images/uat-config.png)
+
+
 To run Watchdog you simply need to run the following command:
 ```bash
-# For Production
-mvn test "-Dgroups=production,none()"
 
-# For UAT
-mvn test "-Dgroups=uat,none()"
+## Run Watchdog against itself
+The respective properties for running Watchdog against itself (i.e. this project code) are `groups=watchdog`.
+
+This will result in Watchdog running tests against its own source code.
+
+### Terminal Example
+```bash
+mvn test "-Dgroups=watchdog"
 ```
-Note `none()` is a special tag that will run non tagged tests (i.e. @Test without @Production or @Uat).
+
+### IntelliJ Example
+![production-config.png](images/watchdog-config.png)
+
 
 # Adding a new test
 To add a new test, create a method and annotated with the `@Test` annotation (see [J Unit](https://junit.org/junit5/docs/current/user-guide/#writing-tests) for details). If the test is only for a specific environment tag it with `@Production` or `@Uat` respectively. For example:
@@ -67,8 +107,8 @@ This project essentially runs a series of J Unit tests. The output should look s
 [INFO] -------------------------------------------------------
 [INFO]  T E S T S
 [INFO] -------------------------------------------------------
-[INFO] Running uk.nhs.england.HelloWorldTest
-[INFO] Tests run: 2, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.063 s -- in uk.nhs.england.HelloWorldTest
+[INFO] Running uk.nhs.england.CheckSubjectTest
+[INFO] Tests run: 2, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.063 s -- in uk.nhs.england.CheckSubjectTest
 [INFO] 
 [INFO] Results:
 [INFO] 
