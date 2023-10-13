@@ -49,9 +49,7 @@ mvn test "-Dgroups=uat,none()" "-Ddomain=uat2.nhsd.io"
 ### IntelliJ Example
 ![production-config.png](images/uat-config.png)
 
-
 To run Watchdog you simply need to run the following command:
-```bash
 
 ## Run Watchdog against itself
 The respective properties for running Watchdog against itself (i.e. this project code) are `groups=watchdog`.
