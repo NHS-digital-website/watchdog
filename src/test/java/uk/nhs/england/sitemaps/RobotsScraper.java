@@ -1,11 +1,13 @@
 package uk.nhs.england.sitemaps;
 
+import uk.nhs.england.Utils;
 import uk.nhs.england.sitemaps.exceptions.NotValidRobotsTxtException;
 import uk.nhs.england.sitemaps.models.UserAgent;
 
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -13,7 +15,6 @@ import java.util.Collections;
 import java.util.List;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import javax.net.ssl.HttpsURLConnection;
 
 public class RobotsScraper {
 
@@ -31,8 +32,7 @@ public class RobotsScraper {
 
         // Step 1: Fetch the robots.txt file
         logger.debug("Fetching " + robotsUrl);
-        URL url = new URL(robotsUrl);
-        HttpsURLConnection connection = (HttpsURLConnection) url.openConnection();
+        HttpURLConnection connection = Utils.openConnection(new URL(robotsUrl));
         connection.setRequestMethod("GET");
         connection.setRequestProperty("User-Agent", "Mozilla/5.0");
         BufferedReader reader = new BufferedReader(new InputStreamReader(connection.getInputStream()));
