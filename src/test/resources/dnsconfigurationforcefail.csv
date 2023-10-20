@@ -1,0 +1,15 @@
+record,domain,expected value
+A,digital.nhs.uk,172.66.0.999
+A,digital.nhs.uk,162.159.140.999
+A CMS,cms.digital.nhs.uk,172.66.0.999
+A CMS,cms.digital.nhs.uk,162.159.140.999
+CNAME,files.digital.nhs.uk,files.prd.nhsd.fail.
+NS,digital.nhs.uk,ns-1474.awsdns-56.fail.
+NS,digital.nhs.uk,ns-89.awsdns-11.fail.
+NS,digital.nhs.uk,ns-1602.awsdns-08.co.fail.
+NS,digital.nhs.uk,ns-594.awsdns-10.fail.
+SOA HOST,digital.nhs.uk,ns-1474.awsdns-56.fail.
+SOA ADMIN,digital.nhs.uk,awsdns-hostmaster.amazon.fail.
+SOA TIME,digital.nhs.uk,1 7200 900 1209600 00000
+TXT GOOGLE,digital.nhs.uk,google-site-verification=R0GLHsCp4x3D29Y4FVQ4nMiYP36JsrKnwPqItVoi000
+TXT V,digital.nhs.uk,v=spf1 include:nhs.net ~fail
