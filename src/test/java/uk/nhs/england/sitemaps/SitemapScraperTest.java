@@ -3,6 +3,7 @@ package uk.nhs.england.sitemaps;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.junit.jupiter.api.Test;
+import uk.nhs.england.Utils;
 import uk.nhs.england.sitemaps.exceptions.NotValidRobotsTxtException;
 import uk.nhs.england.sitemaps.exceptions.NotValidSitemapTypeException;
 import uk.nhs.england.sitemaps.models.Result;
@@ -13,6 +14,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static uk.nhs.england.sitemaps.RobotsScraperUtils.getSitemapsFromRobotsTxt;
 
 import java.io.IOException;
+import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -56,7 +58,7 @@ public class SitemapScraperTest {
             logger.info("Now testing " + url.toString());
 
             // Open a connection to the URL
-            HttpsURLConnection connection = (HttpsURLConnection) url.openConnection();
+            HttpURLConnection connection = Utils.openConnection(url);
             connection.setRequestProperty("User-Agent", "Mozilla/5.0");
             connection.setRequestMethod("GET");
 
