@@ -56,6 +56,18 @@ The respective properties for running Watchdog against itself (i.e. this project
 
 This will result in Watchdog running tests against its own source code.
 
+## Run Watchdog against a mock environment
+The respective properties for running Watchdog against a mack environment, such as Nginx can be the same as UAT or Production, just update the domain to suit.
+
+Note `none()` is a special tag that will run non tagged tests (i.e. @Test without @Production or @Uat).
+
+### Terminal Example
+```bash
+mvn test "-Dgroups=uat,none()" "-Ddomain=localhost:8080" "-Dprotocol=http"
+```
+
+This will result in Watchdog running tests against a local unsecure mock server.
+
 ### Terminal Example
 ```bash
 mvn test "-Dgroups=watchdog"

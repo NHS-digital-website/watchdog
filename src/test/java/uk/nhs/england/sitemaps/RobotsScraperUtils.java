@@ -17,7 +17,7 @@ public class RobotsScraperUtils {
 
     static {
         try {
-            robotsScraper = new RobotsScraper("http://" + Utils.getDomain() + "/robots.txt");
+            robotsScraper = new RobotsScraper(Utils.getProtocol() + "://" + Utils.getDomain() + "/robots.txt");
         } catch (IOException | NotValidRobotsTxtException e) {
             throw new RuntimeException(e);
         }

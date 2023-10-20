@@ -22,6 +22,10 @@ public class Utils {
         return domain;
     }
 
+    public static String getProtocol() {
+        return System.getProperty("protocol", "https");
+    }
+
     /**
      * A helper method that returns the correct HTTP or HTTPS connection respectfully.
      *
