@@ -40,7 +40,7 @@ import uk.nhs.england.tags.Uat;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 
-public class HelloWorldTest {
+public class CheckSubjectTest {
 
     @Test @Uat // only UAT
     public void productionShouldAnswerWithTrue() {
@@ -67,8 +67,8 @@ This project essentially runs a series of J Unit tests. The output should look s
 [INFO] -------------------------------------------------------
 [INFO]  T E S T S
 [INFO] -------------------------------------------------------
-[INFO] Running uk.nhs.england.HelloWorldTest
-[INFO] Tests run: 2, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.063 s -- in uk.nhs.england.HelloWorldTest
+[INFO] Running uk.nhs.england.CheckSubjectTest
+[INFO] Tests run: 2, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.063 s -- in uk.nhs.england.CheckSubjectTest
 [INFO] 
 [INFO] Results:
 [INFO] 
