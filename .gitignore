@@ -18,3 +18,6 @@ buildNumber.properties
 
 # IntelliJ specific files
 .idea
+
+# Watchdog specific files such as logs
+/logs

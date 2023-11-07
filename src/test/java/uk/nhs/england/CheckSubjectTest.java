@@ -18,16 +18,19 @@ public class CheckSubjectTest {
     @Test @Uat
     public void uatOnly() {
         assertTrue(true);
+        assertNotNull(Utils.getDomain());
     }
 
     @Test @Production
     public void productionOnly() {
         assertTrue(true);
+        assertNotNull(Utils.getDomain());
     }
 
     @Test
     public void anySubjectsExceptWatchdogItself() {
         assertTrue(true);
+        assertNotNull(Utils.getDomain());
     }
 
     @Test @Watchdog
@@ -36,3 +39,4 @@ public class CheckSubjectTest {
     }
 
 }
+
