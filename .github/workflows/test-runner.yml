@@ -8,6 +8,9 @@ on:
       TARGET_NAME:
         required: true
         type: string
+      TARGET_DOMAIN:
+        required: true
+        type: string
       TARGET_SLACK_CHANNEL:
         required: true
         type: string
@@ -40,7 +43,7 @@ jobs:
 
       - name: Run tests
         run: |
-          mvn test "-Dgroups=${{ inputs.TARGET_NAME }},none()"
+          mvn test "-Dgroups=${{ inputs.TARGET_NAME }},none()" "-Ddomain=${{ inputs.TARGET_DOMAIN }}"
           
       - name: Slack message (Test Failed)
         if: ${{ failure() }}

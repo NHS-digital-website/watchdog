@@ -12,5 +12,6 @@ jobs:
     uses: ./.github/workflows/test-runner.yml
     with:
       TARGET_NAME: uat
+      TARGET_DOMAIN: ${{ vars.UAT_DOMAIN }}
       TARGET_SLACK_CHANNEL: ${{ vars.SLACK_CHANNEL_UAT }}
     secrets: inherit

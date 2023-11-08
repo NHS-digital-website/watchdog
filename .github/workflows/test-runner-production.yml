@@ -11,5 +11,6 @@ jobs:
     uses: ./.github/workflows/test-runner.yml
     with:
       TARGET_NAME: production
+      TARGET_DOMAIN: ${{ vars.PRODUCTION_DOMAIN }}
       TARGET_SLACK_CHANNEL: ${{ vars.SLACK_CHANNEL_PRODUCTION }}
     secrets: inherit
