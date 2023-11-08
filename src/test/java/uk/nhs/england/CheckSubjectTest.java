@@ -4,6 +4,8 @@ import org.junit.jupiter.api.Test;
 import uk.nhs.england.tags.Production;
 import uk.nhs.england.tags.Uat;
 import uk.nhs.england.tags.Watchdog;
+import uk.nhs.england.utils.helpers.BasicAuth;
+import uk.nhs.england.utils.helpers.SystemProperties;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -17,20 +19,21 @@ public class CheckSubjectTest {
 
     @Test @Uat
     public void uatOnly() {
-        assertTrue(true);
-        assertNotNull(Utils.getDomain());
+        assertNotNull(SystemProperties.getDomain());
+        if(BasicAuth.usingBasicAuth()) {
+            assertNotNull(SystemProperties.getUsername());
+            assertNotNull(SystemProperties.getPassword());
+        }
     }
 
     @Test @Production
     public void productionOnly() {
-        assertTrue(true);
-        assertNotNull(Utils.getDomain());
+        assertNotNull(SystemProperties.getDomain());
     }
 
     @Test
     public void anySubjectsExceptWatchdogItself() {
-        assertTrue(true);
-        assertNotNull(Utils.getDomain());
+        assertNotNull(SystemProperties.getDomain());
     }
 
     @Test @Watchdog

@@ -21,7 +21,7 @@ public abstract class DNSLookUp {
             Lookup lookup = new Lookup(domain, type);
             RECORDS.put(key, lookup.run());
             if(lookup.getResult()!= Lookup.SUCCESSFUL) {
-                logger.error(format("Failed DNS Lookup for type {0} on the domain {1}", Type.string(type), domain));
+                logger.error("{} {} Failed", domain, Type.string(type));
             }
         }
         return RECORDS.get(key);

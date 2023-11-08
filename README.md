@@ -41,9 +41,16 @@ This will result in Watchdog running tests against the UAT environment.
 
 Note `none()` is a special tag that will run non tagged tests (i.e. @Test without @Production or @Uat).
 
+If you need to use basic authentication to connect to UAT, you will need the following properties: `authType=basic`, 
+`usernnme` and `password`.
+
 ### Terminal Example
 ```bash
+# minimum required for UAT
 mvn test "-Dgroups=uat,none()" "-Ddomain=uat2.nhsd.io"
+
+# with basic authentication
+mvn test "-Dgroups=uat,none()" "-Ddomain=uat2.nhsd.io" "-authType=basic" "-Dusername=foo" "-Dpassword=bar"
 ```
 
 ### IntelliJ Example
