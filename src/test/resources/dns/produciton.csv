@@ -1,0 +1,13 @@
+record,domain,expected value
+A,digital.nhs.uk,172.66.0.9
+A,digital.nhs.uk,162.159.140.9
+A,cms.digital.nhs.uk,172.66.0.9
+A,cms.digital.nhs.uk,162.159.140.9
+CNAME,files.digital.nhs.uk,files.prd.nhsd.io.
+NS,digital.nhs.uk,ns-1474.awsdns-56.org.
+NS,digital.nhs.uk,ns-89.awsdns-11.com.
+NS,digital.nhs.uk,ns-1602.awsdns-08.co.uk.
+NS,digital.nhs.uk,ns-594.awsdns-10.net.
+SOA,digital.nhs.uk,@ IN SOA ns-1474.awsdns-56.org. awsdns-hostmaster.amazon.com. (1 7200 900 1209600 86400)
+TXT,digital.nhs.uk,google-site-verification=R0GLHsCp4x3D29Y4FVQ4nMiYP36JsrKnwPqItVoiOtQ
+TXT,digital.nhs.uk,v=spf1 include:nhs.net ~all

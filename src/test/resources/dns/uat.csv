@@ -1,0 +1,4 @@
+record,domain,expected value
+CNAME,uat2.nhsd.io,api.nhsdigital.bloomreach.cloud.
+CNAME,cms-uat2.nhsd.io,api.nhsdigital.bloomreach.cloud.
+CNAME,files.uat2.nhsd.io,dchrdjjao3jy.cloudfront.net.
