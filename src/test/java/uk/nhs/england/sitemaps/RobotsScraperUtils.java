@@ -1,6 +1,6 @@
 package uk.nhs.england.sitemaps;
 
-import uk.nhs.england.Utils;
+import uk.nhs.england.utils.helpers.SystemProperties;
 import uk.nhs.england.sitemaps.exceptions.NotValidRobotsTxtException;
 
 import java.io.IOException;
@@ -13,7 +13,7 @@ public class RobotsScraperUtils {
 
     static {
         try {
-            robotsScraper = new RobotsScraper(Utils.getProtocol() + "://" + Utils.getDomain() + "/robots.txt");
+            robotsScraper = new RobotsScraper(SystemProperties.getProtocol() + "://" + SystemProperties.getDomain() + "/robots.txt");
         } catch (IOException | NotValidRobotsTxtException e) {
             throw new RuntimeException("Error initializing RobotsScraper", e);
         }

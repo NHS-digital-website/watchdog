@@ -1,5 +1,7 @@
 package uk.nhs.england.dnslookups;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvFileSource;
 import org.xbill.DNS.Record;
@@ -11,6 +13,8 @@ import uk.nhs.england.tags.Uat;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class DNSLookUpTests {
+
+    private static final Logger logger = LogManager.getLogger(DNSLookUpTests.class);
 
     @ParameterizedTest @Production
     @CsvFileSource(resources = "/dns/produciton.csv", useHeadersInDisplayName = true)
@@ -49,6 +53,8 @@ public class DNSLookUpTests {
             default:
                 throw new IllegalStateException("Unexpected Record Type: " + record);
         }
+
+        logger.info("{} {} returned the expected value: {}", domain, record, expected);
     }
 
 }

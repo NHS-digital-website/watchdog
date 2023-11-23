@@ -4,10 +4,13 @@
         <Console name="Console" target="SYSTEM_OUT">
             <PatternLayout pattern="%d{HH:mm:ss.SSS} [%t] %-5level %logger{36} - %msg%n"/>
         </Console>
+        <File name="DNSLookUPFile" fileName="logs/watchdog-dnslookups.log" append="false">
+            <PatternLayout pattern="%d{HH:mm:ss.SSS} [%t] %-5level %logger{36} - %msg%n"/>
+        </File>
         <File name="SitemapFile" fileName="logs/watchdog-sitemap.log" append="false">
             <PatternLayout pattern="%d{HH:mm:ss.SSS} [%t] %-5level %logger{36} - %msg%n"/>
         </File>
-        <File name="DNSLookUPFile" fileName="logs/watchdog-dnslookups.log" append="false">
+        <File name="RedirectionFile" fileName="logs/watchdog-redirections.log" append="false">
             <PatternLayout pattern="%d{HH:mm:ss.SSS} [%t] %-5level %logger{36} - %msg%n"/>
         </File>
     </Appenders>
@@ -18,11 +21,11 @@
         <Logger name="uk.nhs.england.dnslookups" level="INFO">
             <AppenderRef ref="DNSLookUPFile"/>
         </Logger>
-        <logger name="uk.nhs.england.dnslookups" level="ERROR">
-            <AppenderRef ref="DNSLookUPFile"/>
-        </logger>
         <Logger name="uk.nhs.england.sitemaps" level="INFO">
             <AppenderRef ref="SitemapFile"/>
+        </Logger>
+        <Logger name="uk.nhs.england.redirection" level="INFO">
+            <AppenderRef ref="RedirectionFile"/>
         </Logger>
     </Loggers>
 </Configuration>

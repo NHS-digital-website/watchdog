@@ -1,8 +1,7 @@
 package uk.nhs.england.sitemaps;
 
 import org.junit.jupiter.api.Test;
-import uk.nhs.england.Utils;
-import uk.nhs.england.sitemaps.exceptions.NotValidRobotsTxtException;
+import uk.nhs.england.utils.helpers.SystemProperties;
 
 import java.io.IOException;
 import java.net.URL;
@@ -30,7 +29,7 @@ public class RobotsScraperTest {
     public void robotsSitemapDomainSameDomain() throws IOException {
         for (String sitemapUrl : getSitemapsFromRobotsTxt()) {
             URL url = new URL(sitemapUrl);
-            assertEquals(Utils.getDomain(), url.getAuthority());
+            assertEquals(SystemProperties.getDomain(), url.getAuthority());
         }
     }
 

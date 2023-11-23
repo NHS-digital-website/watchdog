@@ -2,7 +2,7 @@ package uk.nhs.england.sitemaps;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import uk.nhs.england.Utils;
+import uk.nhs.england.utils.Utils;
 import uk.nhs.england.sitemaps.exceptions.NotValidRobotsTxtException;
 import uk.nhs.england.sitemaps.models.UserAgent;
 
@@ -28,9 +28,8 @@ public class RobotsScraper {
     public RobotsScraper(final String robotsUrl) throws IOException, NotValidRobotsTxtException {
 
         logger.debug("Fetching Robot URL " + robotsUrl);
-        HttpURLConnection connection = Utils.openConnection(new URL(robotsUrl));
+        HttpURLConnection connection = Utils.openDecoratedConnection(new URL(robotsUrl));
         connection.setRequestMethod("GET");
-        connection.setRequestProperty("User-Agent", "Mozilla/5.0");
         BufferedReader reader = new BufferedReader(new InputStreamReader(connection.getInputStream()));
 
         logger.debug("Parsing Robot URL " + robotsUrl);

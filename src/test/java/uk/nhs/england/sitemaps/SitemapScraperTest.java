@@ -4,7 +4,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
-import uk.nhs.england.Utils;
+import uk.nhs.england.utils.Utils;
 import uk.nhs.england.sitemaps.exceptions.NotValidRobotsTxtException;
 import uk.nhs.england.sitemaps.exceptions.NotValidSitemapTypeException;
 import uk.nhs.england.sitemaps.models.Result;
@@ -93,8 +93,7 @@ public class SitemapScraperTest {
 
             logger.info("Now testing " + url.toString());
 
-            HttpURLConnection connection = Utils.openConnection(url);
-            connection.setRequestProperty("User-Agent", "Mozilla/5.0");
+            HttpURLConnection connection = Utils.openDecoratedConnection(url);
             connection.setRequestMethod("GET");
 
             int responseCode = connection.getResponseCode();
