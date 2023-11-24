@@ -1,10 +1,7 @@
 package uk.nhs.england.utils;
 
-import uk.nhs.england.utils.helpers.BasicAuthenticator;
-
 import javax.net.ssl.HttpsURLConnection;
 import java.io.IOException;
-import java.net.Authenticator;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -53,11 +50,6 @@ public class Utils {
     public static HttpURLConnection decorateConnection(HttpURLConnection connection) {
         // Set the user agent to mimic a web browser request
         connection.setRequestProperty("User-Agent", "Mozilla/5.0");
-
-        // Set basic authentication respectively
-        if(BasicAuthenticator.usingBasicAuth()) {
-            Authenticator.setDefault(new BasicAuthenticator());
-        }
 
         return connection;
     }

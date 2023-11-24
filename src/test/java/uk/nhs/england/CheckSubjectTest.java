@@ -20,7 +20,7 @@ public class CheckSubjectTest {
     @Test @Uat
     public void uatOnly() {
         assertNotNull(SystemProperties.getDomain());
-        if(BasicAuthenticator.usingBasicAuth()) {
+        if(BasicAuthenticator.requiresBasicAuth()) {
             assertNotNull(SystemProperties.getUsername());
             assertNotNull(SystemProperties.getPassword());
         }
