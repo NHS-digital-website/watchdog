@@ -1,6 +1,8 @@
 package uk.nhs.england.sitemaps;
 
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import uk.nhs.england.utils.helpers.BasicAuthenticatorExtension;
 import uk.nhs.england.utils.helpers.SystemProperties;
 
 import java.io.IOException;
@@ -9,6 +11,7 @@ import java.net.URL;
 import static org.junit.jupiter.api.Assertions.*;
 import static uk.nhs.england.sitemaps.RobotsScraperUtils.getSitemapsFromRobotsTxt;
 
+@ExtendWith(BasicAuthenticatorExtension.class)
 public class RobotsScraperTest {
 
     @Test

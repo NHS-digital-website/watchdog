@@ -8,8 +8,6 @@ import java.net.URL;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import static uk.nhs.england.utils.helpers.BasicAuth.*;
-
 public class Utils {
 
     /**
@@ -52,11 +50,6 @@ public class Utils {
     public static HttpURLConnection decorateConnection(HttpURLConnection connection) {
         // Set the user agent to mimic a web browser request
         connection.setRequestProperty("User-Agent", "Mozilla/5.0");
-
-        // Set basic authentication respectively
-        if(usingBasicAuth()) {
-            connection.setRequestProperty("Authorization", basicAuthValue());
-        }
 
         return connection;
     }

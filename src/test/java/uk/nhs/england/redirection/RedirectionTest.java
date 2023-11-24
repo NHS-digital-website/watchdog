@@ -1,25 +1,25 @@
 package uk.nhs.england.redirection;
 
-import jdk.nashorn.internal.ir.annotations.Ignore;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvFileSource;
 import uk.nhs.england.utils.Utils;
 import uk.nhs.england.tags.Production;
+import uk.nhs.england.utils.helpers.BasicAuthenticatorExtension;
 import uk.nhs.england.utils.helpers.SystemProperties;
 
 import java.io.IOException;
 import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static uk.nhs.england.utils.Utils.*;
 
+@ExtendWith(BasicAuthenticatorExtension.class)
 public class RedirectionTest {
 
     private static final Logger logger = LogManager.getLogger(RedirectionTest.class);
