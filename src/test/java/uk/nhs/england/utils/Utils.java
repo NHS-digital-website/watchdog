@@ -1,14 +1,15 @@
 package uk.nhs.england.utils;
 
+import uk.nhs.england.utils.helpers.BasicAuthenticator;
+
 import javax.net.ssl.HttpsURLConnection;
 import java.io.IOException;
+import java.net.Authenticator;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-
-import static uk.nhs.england.utils.helpers.BasicAuth.*;
 
 public class Utils {
 
@@ -54,8 +55,8 @@ public class Utils {
         connection.setRequestProperty("User-Agent", "Mozilla/5.0");
 
         // Set basic authentication respectively
-        if(usingBasicAuth()) {
-            connection.setRequestProperty("Authorization", basicAuthValue());
+        if(BasicAuthenticator.usingBasicAuth()) {
+            Authenticator.setDefault(new BasicAuthenticator());
         }
 
         return connection;
