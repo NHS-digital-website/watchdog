@@ -7,8 +7,35 @@ on:
       - webhook-for-uat
 
 jobs:
+
+  start_up_delay:
+    name: Start up delay
+    runs-on: ubuntu-latest
+    steps:
+      - name: Wake Up Call
+        id: wake_up
+        run: |
+          code=$(curl -i \
+          -u ${{ secrets.BASIC_AUTH_USER }}:${{ secrets.BASIC_AUTH_PASSWORD }} \
+          -X GET https://${{ vars.UAT_DOMAIN }} \
+          -o /dev/null -w '%{http_code}\n' -s)
+          echo "code=$code" >> $GITHUB_OUTPUT
+
+      - name: Check Basic Auth Status
+        uses: actions/github-script@v6
+        if: ${{ steps.wake_up.outputs.code != 401 }}
+        with:
+          script: core.setFailed('Response code indicates that authentication failed.')
+        env:
+          CODE: ${{ steps.wake_up.outputs.code }}
+
+      - name: Wait for 2 minutes # to allow the UAT to fully start-up before running the main test suit.
+        run: |
+          sleep 120
+
   test_runner_workflow_job:
     name: Run UAT Tests
+    needs: start_up_delay
     uses: ./.github/workflows/test-runner.yml
     with:
       TARGET_NAME: uat
