@@ -61,6 +61,14 @@ jobs:
         run: |
           mvn test "-Dgroups=${{ inputs.TARGET_NAME }},none()" "-Ddomain=${{ inputs.TARGET_DOMAIN }}" ${{ steps.build_command.outputs.mvn_command_args }}
           
+      - name: Save Logs
+        uses: actions/upload-artifact@v3
+        if: ${{ always() }}
+        with:
+          name: logs
+          path: |
+            logs/*
+          
       - name: Slack message (Test Failed)
         if: ${{ failure() }}
         uses: ./.github/actions/slack-message
