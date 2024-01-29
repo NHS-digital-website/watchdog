@@ -5,8 +5,10 @@ import org.apache.logging.log4j.Logger;
 import org.jsoup.nodes.Document;
 import org.jsoup.select.Elements;
 import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvFileSource;
+import uk.nhs.england.utils.helpers.BasicAuthenticatorExtension;
 import uk.nhs.england.utils.helpers.SystemProperties;
 
 import java.util.List;
@@ -16,6 +18,7 @@ import java.util.function.Function;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.fail;
 
+@ExtendWith(BasicAuthenticatorExtension.class)
 public class SocialLinksTest {
 
     private static final Logger logger = LogManager.getLogger(SocialLinksTest.class);
