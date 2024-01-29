@@ -22,7 +22,7 @@ jobs:
           echo "code=$code" >> $GITHUB_OUTPUT
 
       - name: Check Basic Auth Status
-        uses: actions/github-script@v6
+        uses: actions/github-script@v7
         if: ${{ steps.wake_up.outputs.code == 401 }}
         with:
           script: core.setFailed('Response code indicates that authentication failed.')
