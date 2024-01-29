@@ -23,7 +23,7 @@ jobs:
 
       - name: Check Basic Auth Status
         uses: actions/github-script@v6
-        if: ${{ steps.wake_up.outputs.code != 401 }}
+        if: ${{ steps.wake_up.outputs.code == 401 }}
         with:
           script: core.setFailed('Response code indicates that authentication failed.')
         env:
