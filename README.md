@@ -28,7 +28,11 @@ Note `none()` is a special tag that will run non tagged tests (i.e. @Test withou
 
 ### Terminal Example
 ```bash
+# minimum required for production
 mvn test "-Dgroups=production,none()" "-Ddomain=digital.nhs.uk"
+
+# with a WAF accepted bot name
+mvn test "-Dgroups=production,none()" "-Ddomain=digital.nhs.uk" "-DuserAgent=*************"
 ```
 
 ### IntelliJ Example
@@ -54,7 +58,7 @@ mvn test "-Dgroups=uat,none()" "-Ddomain=uat2.nhsd.io" "-authType=basic" "-Duser
 ```
 
 ### IntelliJ Example
-![production-config.png](images/uat-config.png)
+![uat-config.png](images/uat-config.png)
 
 To run Watchdog you simply need to run the following command:
 

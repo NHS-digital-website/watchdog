@@ -1,5 +1,7 @@
 package uk.nhs.england.utils;
 
+import uk.nhs.england.utils.helpers.SystemProperties;
+
 import javax.net.ssl.HttpsURLConnection;
 import java.io.IOException;
 import java.net.HttpURLConnection;
@@ -49,7 +51,7 @@ public class Utils {
      */
     public static HttpURLConnection decorateConnection(HttpURLConnection connection) {
         // Set the user agent to mimic a web browser request
-        connection.setRequestProperty("User-Agent", "Mozilla/5.0");
+        connection.setRequestProperty("User-Agent", SystemProperties.getUserAgent());
 
         return connection;
     }

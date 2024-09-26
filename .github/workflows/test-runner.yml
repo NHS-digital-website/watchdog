@@ -17,6 +17,9 @@ on:
       BASIC_AUTH:
         required: false
         type: boolean
+      USER_AGENT:
+        required: false
+        type: boolean
 
 jobs:
   test-runner:
@@ -53,7 +56,10 @@ jobs:
           script: |
             let args = '';
             if (process.env.BASIC_AUTH === 'true') {
-              args += `"-DauthType=basic" "-Dusername=${{ secrets.BASIC_AUTH_USER }}" "-Dpassword=${{ secrets.BASIC_AUTH_PASSWORD }}"`;
+              args += ` "-DauthType=basic" "-Dusername=${{ secrets.BASIC_AUTH_USER }}" "-Dpassword=${{ secrets.BASIC_AUTH_PASSWORD }}"`;
+            }
+            if (inputs.USER_AGENT) {
+              args += ` "-DuserAgent=${{ inputs.USER_AGENT }}"`;
             }
             core.setOutput("mvn_command_args", args);
 
