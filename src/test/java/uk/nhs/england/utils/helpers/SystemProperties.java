@@ -16,7 +16,8 @@ public class SystemProperties {
         PROTOCOL("protocol"),
         USERNAME("username"),
         PASSWORD("password"),
-        AUTH_TYPE("authType");
+        AUTH_TYPE("authType"),
+        USER_AGENT("userAgent");
 
         private final String key;
 
@@ -48,6 +49,11 @@ public class SystemProperties {
     public static String getAuthType() {
         return getOptionalSystemPropertyFor(SystemPropertyKey.AUTH_TYPE);
     }
+
+    public static String getUserAgent() {
+        return getOptionalSystemPropertyFor(SystemPropertyKey.USER_AGENT, "Mozilla/5.0");
+    }
+
 
     private static String getRequiredSystemPropertyOrThrowFor(SystemPropertyKey key) {
         String value = System.getProperty(key.getKey());
