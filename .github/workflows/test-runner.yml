@@ -19,7 +19,7 @@ on:
         type: boolean
       USER_AGENT:
         required: false
-        type: boolean
+        type: string
 
 jobs:
   test-runner:
