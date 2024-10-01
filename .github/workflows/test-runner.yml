@@ -58,7 +58,7 @@ jobs:
             if (process.env.BASIC_AUTH === 'true') {
               args += ` "-DauthType=basic" "-Dusername=${{ secrets.BASIC_AUTH_USER }}" "-Dpassword=${{ secrets.BASIC_AUTH_PASSWORD }}"`;
             }
-            if (inputs.USER_AGENT) {
+            if ("${{ inputs.USER_AGENT }}".length > 0) {
               args += ` "-DuserAgent=${{ inputs.USER_AGENT }}"`;
             }
             core.setOutput("mvn_command_args", args);
