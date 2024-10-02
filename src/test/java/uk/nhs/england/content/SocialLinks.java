@@ -5,6 +5,7 @@ import org.apache.logging.log4j.Logger;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.select.Elements;
+import uk.nhs.england.utils.helpers.SystemProperties;
 
 import java.util.function.Function;
 import java.util.List;
@@ -27,7 +28,7 @@ public class SocialLinks {
         if (cachedLinks == null) {
             this.cachedLinks = new ArrayList<>();;
             try {
-                Document document = Jsoup.connect(address).get();
+                Document document = Jsoup.connect(address).userAgent(SystemProperties.getUserAgent()).get();
                 Elements links = linkExtractor.apply(document);
                 cachedLinks = links.stream()
                         .map(link -> link.attr("href"))
