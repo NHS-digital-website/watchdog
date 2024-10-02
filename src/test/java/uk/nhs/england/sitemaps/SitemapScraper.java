@@ -6,6 +6,7 @@ import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import uk.nhs.england.sitemaps.exceptions.NotValidSitemapTypeException;
+import uk.nhs.england.utils.helpers.SystemProperties;
 
 import java.io.IOException;
 import java.net.MalformedURLException;
@@ -24,7 +25,7 @@ public class SitemapScraper {
 
     public SitemapScraper(final String sitemap) throws IOException, NotValidSitemapTypeException {
         logger.info("Fetching sitemap: " + sitemap);
-        Document document = Jsoup.connect(sitemap).get();
+        Document document = Jsoup.connect(sitemap).userAgent(SystemProperties.getUserAgent()).get();
 
         if (typeOf(document, "UrlSet")) {
             urls.addAll(getLocations(document));
