@@ -47,6 +47,18 @@ public class RedirectionTest {
         testRedirection("CMS Managed Redirects", target.toString(), newLocation);
     }
 
+     /**
+     * Check that the HSCIC redirection to digital works 
+     * as expected.
+     */
+    @ParameterizedTest @Production
+    @CsvFileSource(resources = "/redirections/redirection-links.csv", numLinesToSkip = 1)
+    void redirectionsTest(String originalLocation, String newLocation) throws IOException {
+
+        testRedirection("HSCIC Redirects", originalLocation, newLocation);
+    }
+
+
     public void testRedirection(final String groupName, final String originalLocation, final String newLocation) throws IOException {
         // Set up jump logging
         List<Jump> jumps = new ArrayList<>();
