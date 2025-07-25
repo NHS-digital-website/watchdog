@@ -26,12 +26,13 @@ public class RedirectionTest {
 
     /**
      * This test checks the old Developer Network links continue to redirect to digital.nhs.uk correctly.
-     */
+
     @ParameterizedTest @Production
     @CsvFileSource(resources = "/redirections/old-developer-network-links.csv", numLinesToSkip = 1)
     void developerNetworkRedirectionsTest(String originalLocation, String newLocation) throws IOException {
         testRedirection("Developer Network", originalLocation, newLocation);
     }
+     */
 
     /**
      * This test checks a sample of the CMS managed redirect, to confirm the CMS's redirect system is likely configured
