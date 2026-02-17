@@ -58,6 +58,15 @@ public class RedirectionTest {
         testRedirection("HSCIC Redirects", originalLocation, newLocation);
     }
 
+    /**
+     * Check that the legacy FHIR endpoints are rewritten via Simplifier as expected.
+     */
+    @ParameterizedTest @Production
+    @CsvFileSource(resources = "/redirections/old-fhir-links.csv", numLinesToSkip = 1)
+    void oldFhirLinksRedirectedToSimplifier(String originalLocation, String newLocation) throws IOException {
+        testRedirection("FHIR Redirects", originalLocation, newLocation);
+    }
+
 
     public void testRedirection(final String groupName, final String originalLocation, final String newLocation) throws IOException {
         // Set up jump logging
@@ -69,7 +78,7 @@ public class RedirectionTest {
         boolean hadException = false;
 
         try {
-            while (connection.getResponseCode() == 301) {
+            while (isRedirect(connection.getResponseCode())) {
                 // Record the jump
                 jumps.add(jump.setStop(qualifiedLocation(connection)));
                 jump = new Jump(qualifiedLocation(connection));
@@ -90,7 +99,11 @@ public class RedirectionTest {
             connection.disconnect();
         }
 
-        assertTrue(jumps.stream().anyMatch(j -> j.getStop() != null && j.getStop().endsWith(newLocation)));
+        boolean matchedLocation = jumps.stream()
+                .anyMatch(j -> j.getStop() != null && j.getStop().endsWith(newLocation));
+        String lastKnownLocation = getLastKnownLocation(jumps);
+        assertTrue(matchedLocation,
+                String.format("Expected redirect to land on '%s' but last location was '%s'", newLocation, lastKnownLocation));
     }
 
     private static HttpURLConnection connectTo(String originalLocation) throws IOException {
@@ -142,5 +155,23 @@ public class RedirectionTest {
         fullMessage.append("Final Outcome: ").append(outcome).append("\n");
 
         logger.info(fullMessage.toString());
+    }
+
+    private static String getLastKnownLocation(List<Jump> jumps) {
+        for (int i = jumps.size() - 1; i >= 0; i--) {
+            Jump jump = jumps.get(i);
+            if (jump.getStop() != null) {
+                return jump.getStop();
+            }
+        }
+        return jumps.get(jumps.size() - 1).getStart();
+    }
+
+    private static boolean isRedirect(int responseCode) {
+        return responseCode == HttpURLConnection.HTTP_MOVED_PERM // 301
+                || responseCode == HttpURLConnection.HTTP_MOVED_TEMP // 302
+                || responseCode == HttpURLConnection.HTTP_SEE_OTHER // 303
+                || responseCode == 307 // Temporary Redirect (missing from HttpURLConnection constants)
+                || responseCode == 308; // Permanent Redirect (missing from HttpURLConnection constants)
     }
 }
