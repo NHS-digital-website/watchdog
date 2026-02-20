@@ -19,7 +19,6 @@ https://developer.nhs.uk/downloads-data/fhir-documents/,https://digital.nhs.uk/s
 https://developer.nhs.uk/downloads-data/structured-headings-hl7v3-cda/,https://digital.nhs.uk/services/fhir-apis/guidance-for-developers/structured-headings-hl7v3-clinical-document-architecture
 https://developer.nhs.uk/downloads-data/gpes-dms/,https://digital.nhs.uk/services/general-practice-extraction-service/guidance-for-developers/general-practice-extraction-service-dms
 https://developer.nhs.uk/downloads-data/fhir-sci-adw-profiles/,https://digital.nhs.uk/services/fhir-apis/guidance-for-developers/fhir-sc-adw-profiles
-https://developer.nhs.uk/library/interoperability/care-connect-api/,https://digital.nhs.uk/about-nhs-digital/our-work/nhs-digital-data-and-technology-standards/framework/beta---use-of-fhir-based-apis#interoperability-priority-areas
 https://developer.nhs.uk/library/glossary/,https://digital.nhs.uk/services/developer-resources/glossary-of-developer-terms
 https://developer.nhs.uk/learn/fhir-profile-vs-api/,https://digital.nhs.uk/services/fhir-apis/fhir-profiles-and-fhir-apis
 https://developer.nhs.uk/downloads-data/fhir-dds-dms/,https://digital.nhs.uk/services/diagnostics-data-service/diagnostic-data-service---developer-resources
@@ -160,3 +159,6 @@ https://developer.nhs.uk/apis/dos-api/reject_reasons.html,https://digital.nhs.uk
 https://developer.nhs.uk/apis/dos-api/deploy_overview.html,https://digital.nhs.uk/services/directory-of-services-dos/
 https://developer.nhs.uk/apis/dos-api/api_limits.html,https://digital.nhs.uk/services/directory-of-services-dos/
 https://developer.nhs.uk/apis/gpconnect-messaging/,https://simplifier.net/guide/gp-connect-send-document/home?version=2.0.5-public-beta
+https://developer.nhs.uk/,https://digital.nhs.uk/developer/decommissioning-developer.nhs.uk-and-fhir-servers
+https://developer.nhs.uk/jenkins,https://digital.nhs.uk/developer/decommissioning-developer.nhs.uk-and-fhir-servers
+https://data.developer.nhs.uk/,https://digital.nhs.uk/developer/decommissioning-developer.nhs.uk-and-fhir-servers
