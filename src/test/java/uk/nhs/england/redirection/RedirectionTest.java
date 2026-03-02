@@ -76,6 +76,7 @@ public class RedirectionTest {
         // We need to fail the test if this throws an exception.
         HttpURLConnection connection = connectTo(originalLocation);
         boolean hadException = false;
+        String outcome = null;
 
         try {
             while (isRedirect(connection.getResponseCode())) {
@@ -87,15 +88,25 @@ public class RedirectionTest {
             }
         } catch (IOException e) {
             hadException = true;
-            logResults(groupName + ":", jumps, e.getClass().getSimpleName());
+            outcome = e.getClass().getSimpleName();
+            logResults(groupName + ":", jumps, outcome);
         } finally {
 
             // Record the final jump and log the results
             jumps.add(jump);
             jump.setStop(null);
             if (!hadException) {
-                logResults(groupName + ":", jumps, String.valueOf(connection.getResponseCode()));
+                outcome = String.valueOf(connection.getResponseCode());
+                logResults(groupName + ":", jumps, outcome);
             }
+
+            String finalLocation = jumps.get(jumps.size() - 1).getStart();
+            RedirectionReport.append(groupName,
+                    originalLocation,
+                    newLocation,
+                    finalLocation,
+                    outcome);
+
             connection.disconnect();
         }
 
