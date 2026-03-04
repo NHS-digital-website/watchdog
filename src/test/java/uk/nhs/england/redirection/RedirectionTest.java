@@ -34,6 +34,24 @@ public class RedirectionTest {
     }
 
     /**
+     * This test keeps track of the NRLS host-level redirects that now point to the decommissioning comms page.
+     */
+    @ParameterizedTest @Production
+    @CsvFileSource(resources = "/redirections/nrls-digital-links.csv", numLinesToSkip = 1)
+    void nrlsRedirectionsTest(String originalLocation, String newLocation) throws IOException {
+        testRedirection("NRLS Redirects", originalLocation, newLocation);
+    }
+
+    /**
+     * This test keeps track of the Enterprise Architecture host-level redirects that now point to the comms page.
+     */
+    @ParameterizedTest @Production
+    @CsvFileSource(resources = "/redirections/enterprisearchitecture-links.csv", numLinesToSkip = 1)
+    void enterpriseArchitectureRedirectionsTest(String originalLocation, String newLocation) throws IOException {
+        testRedirection("Enterprise Architecture Redirects", originalLocation, newLocation);
+    }
+
+    /**
      * This test checks a sample of the CMS managed redirect, to confirm the CMS's redirect system is likely configured
      * as expected.
      */
@@ -103,7 +121,7 @@ public class RedirectionTest {
                 .anyMatch(j -> j.getStop() != null && j.getStop().endsWith(newLocation));
         String lastKnownLocation = getLastKnownLocation(jumps);
         assertTrue(matchedLocation,
-                String.format("Expected redirect to land on '%s' but last location was '%s'", newLocation, lastKnownLocation));
+                String.format("For '%s', the expected redirect should land on '%s' but last location was '%s'", originalLocation, newLocation, lastKnownLocation));
     }
 
     private static HttpURLConnection connectTo(String originalLocation) throws IOException {
