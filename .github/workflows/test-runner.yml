@@ -65,7 +65,7 @@ jobs:
 
       - name: Run tests
         run: |
-          mvn test "-Dgroups=${{ inputs.TARGET_NAME }},none()" "-Ddomain=${{ inputs.TARGET_DOMAIN }}" ${{ steps.build_command.outputs.mvn_command_args }}
+          mvn test "-Dgroups=${{ inputs.TARGET_NAME }},none()" "-Ddomain=${{ inputs.TARGET_DOMAIN }}" "-DCheckIpFilter=true" ${{ steps.build_command.outputs.mvn_command_args }}
           
       - name: Save Logs
         uses: actions/upload-artifact@v4
@@ -95,5 +95,4 @@ jobs:
           MESSAGE: |
             :green_tick: All Watchdog tests have passed successfully.
               
-
 
