@@ -25,39 +25,12 @@ public class RedirectionTest {
     private static final Logger logger = LogManager.getLogger(RedirectionTest.class);
 
     /**
-     * This test checks the old Developer Network links continue to redirect to digital.nhs.uk correctly.
-     */
-    @ParameterizedTest @Production
-    @CsvFileSource(resources = "/redirections/old-developer-network-links.csv", numLinesToSkip = 1)
-    void developerNetworkRedirectionsTest(String originalLocation, String newLocation) throws IOException {
-        testRedirection("Developer Network", originalLocation, newLocation);
-    }
-
-    /**
-     * This test keeps track of the NRLS host-level redirects that now point to the decommissioning comms page.
-     */
-    @ParameterizedTest @Production
-    @CsvFileSource(resources = "/redirections/nrls-digital-links.csv", numLinesToSkip = 1)
-    void nrlsRedirectionsTest(String originalLocation, String newLocation) throws IOException {
-        testRedirection("NRLS Redirects", originalLocation, newLocation);
-    }
-
-    /**
-     * This test keeps track of the Enterprise Architecture host-level redirects that now point to the comms page.
-     */
-    @ParameterizedTest @Production
-    @CsvFileSource(resources = "/redirections/enterprisearchitecture-links.csv", numLinesToSkip = 1)
-    void enterpriseArchitectureRedirectionsTest(String originalLocation, String newLocation) throws IOException {
-        testRedirection("Enterprise Architecture Redirects", originalLocation, newLocation);
-    }
-
-    /**
-     * This test checks a sample of the CMS managed redirect, to confirm the CMS's redirect system is likely configured
+     * This test checks a sample of the CMS managed redirects, to confirm the CMS's redirect system is likely configured
      * as expected.
      */
     @ParameterizedTest
-    @CsvFileSource(resources = "/redirections/cms-managed-links.csv", numLinesToSkip = 1)
-    void cmsRedirectionsTest(String originalLocation, String newLocation) throws IOException {
+    @CsvFileSource(resources = "/redirections/cms-managed-redirects.csv", numLinesToSkip = 1)
+    void cmsManagedManagedRedirectsTest(String originalLocation, String newLocation) throws IOException {
         StringBuilder target = new StringBuilder(originalLocation);
         if(!hasAProtocolAndAuthority(originalLocation)) {
             target.insert(0, SystemProperties.getProtocol() + "://" + SystemProperties.getDomain());
@@ -65,15 +38,14 @@ public class RedirectionTest {
         testRedirection("CMS Managed Redirects", target.toString(), newLocation);
     }
 
-     /**
-     * Check that the HSCIC redirection to digital works 
-     * as expected.
+    /**
+     * Check that externally managed redirects to digital work as expected.
      */
     @ParameterizedTest @Production
-    @CsvFileSource(resources = "/redirections/redirection-links.csv", numLinesToSkip = 1)
-    void redirectionsTest(String originalLocation, String newLocation) throws IOException {
+    @CsvFileSource(resources = "/redirections/externally-managed-redirects.csv", numLinesToSkip = 1)
+    void externallyManagedRedirectsTest(String originalLocation, String newLocation) throws IOException {
 
-        testRedirection("HSCIC Redirects", originalLocation, newLocation);
+        testRedirection("Externally Managed Redirects", originalLocation, newLocation);
     }
 
     /**
