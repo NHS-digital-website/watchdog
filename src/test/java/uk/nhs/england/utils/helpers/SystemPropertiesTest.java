@@ -1,7 +1,6 @@
 package uk.nhs.england.utils.helpers;
 
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
 import uk.nhs.england.tags.Watchdog;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -34,5 +33,31 @@ public class SystemPropertiesTest {
     @Test @Watchdog
     public void testGetNullForAuthTypeWhenPropertyNotSet() {
         assertNull(SystemProperties.getAuthType());
+    }
+
+    @Test @Watchdog
+    public void testIpFilterCheckDisabledByDefault() {
+        System.clearProperty("CheckIpFilter");
+        assertFalse(SystemProperties.isIpFilterCheckEnabled());
+    }
+
+    @Test @Watchdog
+    public void testIpFilterCheckEnabledWhenFlagIsPresentWithoutValue() {
+        System.setProperty("CheckIpFilter", "");
+        try {
+            assertTrue(SystemProperties.isIpFilterCheckEnabled());
+        } finally {
+            System.clearProperty("CheckIpFilter");
+        }
+    }
+
+    @Test @Watchdog
+    public void testIpFilterCheckEnabledWhenFlagIsTrue() {
+        System.setProperty("CheckIpFilter", "true");
+        try {
+            assertTrue(SystemProperties.isIpFilterCheckEnabled());
+        } finally {
+            System.clearProperty("CheckIpFilter");
+        }
     }
 }

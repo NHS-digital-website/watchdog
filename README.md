@@ -79,6 +79,17 @@ mvn test "-Dgroups=uat,none()" "-Ddomain=localhost:8080" "-Dprotocol=http"
 
 This will result in Watchdog running tests against a local unsecure mock server.
 
+## Enable IP filter verification
+The IP filter regression check is disabled by default because most developer laptops are allow-listed and would
+therefore receive a `200` response instead of the expected `403`. To enable the test, pass the `-DCheckIpFilter=true`
+flag when invoking Maven. Every address defined in `src/test/resources/security/ip-filter-blocked-addresses.txt` will
+be requested and must return `403 Forbidden`.
+
+### Terminal Example
+```bash
+mvn test "-Dgroups=production,none()" "-Ddomain=digital.nhs.uk" "-DCheckIpFilter=true"
+```
+
 ### Terminal Example
 ```bash
 mvn test "-Dgroups=watchdog"

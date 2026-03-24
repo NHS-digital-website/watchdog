@@ -17,7 +17,8 @@ public class SystemProperties {
         USERNAME("username"),
         PASSWORD("password"),
         AUTH_TYPE("authType"),
-        USER_AGENT("userAgent");
+        USER_AGENT("userAgent"),
+        CHECK_IP_FILTER("CheckIpFilter");
 
         private final String key;
 
@@ -52,6 +53,14 @@ public class SystemProperties {
 
     public static String getUserAgent() {
         return getOptionalSystemPropertyFor(SystemPropertyKey.USER_AGENT, "Mozilla/5.0");
+    }
+
+    public static boolean isIpFilterCheckEnabled() {
+        String value = getOptionalSystemPropertyFor(SystemPropertyKey.CHECK_IP_FILTER);
+        if (value == null) {
+            return false;
+        }
+        return value.isEmpty() || Boolean.parseBoolean(value);
     }
 
 
