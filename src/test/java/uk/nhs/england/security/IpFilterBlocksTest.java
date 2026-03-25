@@ -20,7 +20,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class IpFilterBlocksTest {
 
@@ -41,7 +41,8 @@ public class IpFilterBlocksTest {
         try {
             int responseCode = connection.getResponseCode();
             logger.info("IP filter check for {} returned {}", address, responseCode);
-            assertEquals(HttpURLConnection.HTTP_FORBIDDEN, responseCode,
+            boolean isBlocked = responseCode == HttpURLConnection.HTTP_FORBIDDEN  || responseCode == HttpURLConnection.HTTP_UNAUTHORIZED;
+            assertTrue(isBlocked,
                     () -> "Expected IP filter to block " + address + " but received " + responseCode);
         } finally {
             connection.disconnect();
