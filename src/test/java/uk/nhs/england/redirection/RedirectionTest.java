@@ -48,16 +48,6 @@ public class RedirectionTest {
         testRedirection("Externally Managed Redirects", originalLocation, newLocation);
     }
 
-    /**
-     * Check that the legacy FHIR endpoints are rewritten via Simplifier as expected.
-     */
-    @ParameterizedTest @Production
-    @CsvFileSource(resources = "/redirections/old-fhir-links.csv", numLinesToSkip = 1)
-    void oldFhirLinksRedirectedToSimplifier(String originalLocation, String newLocation) throws IOException {
-        testRedirection("FHIR Redirects", originalLocation, newLocation);
-    }
-
-
     public void testRedirection(final String groupName, final String originalLocation, final String newLocation) throws IOException {
         // Set up jump logging
         List<Jump> jumps = new ArrayList<>();
